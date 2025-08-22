@@ -16,12 +16,12 @@ RUN apt-get update && \
     locales \
     man \
     pipx \
-    python3 \
-    python3-pip \
-    software-properties-common \
+    # python3 \
+    # python3-pip \
+    # software-properties-common \
     sudo \
-    systemd \
-    systemd-sysv \
+    # systemd \
+    # systemd-sysv \
     unzip \
     wget \
     && rm -rf /var/lib/apt/lists/*
