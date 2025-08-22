@@ -1,5 +1,17 @@
 FROM nvcr.io/nvidia/tensorrt-llm/devel:1.1.0rc1
 
+SHELL ["/bin/bash", "-c"]
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install the Docker apt repository
+RUN apt-get update && \
+    apt-get upgrade --yes --no-install-recommends --no-install-suggests && \
+    apt-get install --yes --no-install-recommends --no-install-suggests \
+    ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+COPY docker-archive-keyring.gpg /usr/share/keyrings/docker-archive-keyring.gpg
+COPY docker.list /etc/apt/sources.list.d/docker.list
+
 # Install baseline packages
 RUN apt-get update && \
     apt-get install --yes --no-install-recommends --no-install-suggests \
@@ -24,6 +36,10 @@ RUN apt-get update && \
     systemd-sysv \
     unzip \
     wget \
+    rsync && \
+# Install latest Git using their official PPA
+    add-apt-repository ppa:git-core/ppa && \
+    apt-get install --yes git \  
     && rm -rf /var/lib/apt/lists/*
 
 # Enables Docker starting with systemd
