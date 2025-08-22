@@ -5,12 +5,12 @@ RUN apt-get update && \
     apt-get install --yes --no-install-recommends --no-install-suggests \
     bash \
     build-essential \
-    containerd.io \
+    # containerd.io \
     curl \
-    docker-ce \
-    docker-ce-cli \
-    docker-buildx-plugin \
-    docker-compose-plugin \
+    # docker-ce \
+    # docker-ce-cli \
+    # docker-buildx-plugin \
+    # docker-compose-plugin \
     htop \
     jq \
     locales \
@@ -26,13 +26,11 @@ RUN apt-get update && \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-
 # Enables Docker starting with systemd
-RUN systemctl enable docker
+# RUN systemctl enable docker
 
 # Create a symlink for standalone docker-compose usage
-RUN ln -s /usr/libexec/docker/cli-plugins/docker-compose /usr/bin/docker-compose
+# RUN ln -s /usr/libexec/docker/cli-plugins/docker-compose /usr/bin/docker-compose
 
 # Generate the desired locale (en_US.UTF-8)
 RUN locale-gen en_US.UTF-8
@@ -54,3 +52,6 @@ RUN userdel -r ubuntu && \
 
 USER coder
 RUN pipx ensurepath # adds user's bin directory to PATH
+
+# install rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
