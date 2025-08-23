@@ -27,7 +27,8 @@
 			"extensions": [
 				"vadimcn.vscode-lldb",
 				"rust-lang.rust-analyzer",
-				"fill-labs.dependi"
+				"fill-labs.dependi",
+				"google.gemini-cli-vscode-ide-companion"
 			]
 		}
 	},
